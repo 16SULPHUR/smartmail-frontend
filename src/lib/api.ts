@@ -11,8 +11,8 @@ export interface ApiEmailsResponse {
   // categories?: string[]; // If you add this
 }
 
-const API_BASE_URL = 'http://localhost:3000/api';
-// const API_BASE_URL = 'https://outbox-assignment-kappa.vercel.app/api';
+// const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://outbox-assignment-kappa.vercel.app/api';
 
 export interface FetchEmailsParams {
   search?: string;
