@@ -1,3 +1,4 @@
+// src/components/filters/CategoryFilter.tsx
 import * as React from 'react';
 import {
   Select,
@@ -5,60 +6,47 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"; 
 
-// Updated list of E-commerce Categories
-const ECOMMERCE_CATEGORIES = [
-  "New Order",
-  "Order Update",
-  "Return Request",
-  "Return Processed",
-  "Refund Issued",
-  "Customer Inquiry",
-  "Platform Notification",
-  "Payment Dispute/Chargeback",
-  "Marketing/Promotions (from Platforms)",
-  "Supplier/Logistics Communication",
-  "Other",
+// Default list if availableCategories is not provided or empty
+const DEFAULT_FALLBACK_CATEGORIES = [
+  "New Order", "Order Update", "Return Request", "Refund Issued",
+  "Customer Inquiry", "Platform Notification", "Other",
 ];
 
 interface CategoryFilterProps {
   selectedCategory: string | undefined;
   onCategoryChange: (category: string | undefined) => void;
-  // Optional: if you want to dynamically populate categories from API response
-  // availableCategories?: string[];
+  availableCategories?: string[]; // MODIFIED: Make this prop optional
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory,
   onCategoryChange,
-  // availableCategories // Uncomment if you decide to use dynamic categories
+  availableCategories,
 }) => {
   const handleValueChange = (value: string) => {
     onCategoryChange(value === 'all' ? undefined : value);
   };
 
-  // Use availableCategories if provided, otherwise use the static list
-  // const categoriesToDisplay = availableCategories && availableCategories.length > 0 
-  //                             ? availableCategories 
-  //                             : ECOMMERCE_CATEGORIES;
-  // For now, sticking with the static list as per the original component's design.
-  const categoriesToDisplay = ECOMMERCE_CATEGORIES;
-
+  const categoriesToDisplay = 
+    availableCategories && availableCategories.length > 0 
+      ? availableCategories 
+      : DEFAULT_FALLBACK_CATEGORIES; // Use fallback if dynamic list is empty or not provided
 
   return (
     <div className="flex flex-col space-y-1.5">
       <label htmlFor="category-filter" className="text-sm font-medium">Category</label>
       <Select
-        value={selectedCategory || 'all'} // If selectedCategory is undefined, 'all' is shown
+        value={selectedCategory || 'all'}
         onValueChange={handleValueChange}
       >
-        <SelectTrigger id="category-filter" className="w-full sm:w-[200px] md:w-[220px]"> {/* Made width responsive */}
+        <SelectTrigger id="category-filter" className="w-full sm:w-[200px] md:w-[220px]">
           <SelectValue placeholder="Filter by category..." />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All Categories</SelectItem>
-          {categoriesToDisplay.sort().map((category) => ( // Added .sort() for consistent order
+          {categoriesToDisplay.sort().map((category) => (
             <SelectItem key={category} value={category}>
               {category}
             </SelectItem>
