@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { LogIn, Eye, PlayCircle, Mail, Zap, BarChart2, BellRing, DatabaseZap, MessageSquareText, SearchCheck } from 'lucide-react'; // Added more icons
+import { LogIn, Eye, Mail, Zap, BellRing, DatabaseZap, MessageSquareText, SearchCheck } from 'lucide-react'; // Added more icons
 
 export const Auth: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false); // false = show Demo, true = show Login
